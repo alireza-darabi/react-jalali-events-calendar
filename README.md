@@ -15,7 +15,7 @@ A fully customizable Persian calendar component for React and Next.js with suppo
 - ✅ No external calendar dependencies
 
 
-📦 Installation:
+## 📦 Installation:
 
 ```bash
 npm install react-persian-calendar
@@ -25,7 +25,7 @@ or
 yarn add react-persian-calendar
 ```
 
-⚠️ Tailwind CSS Requirement
+## ⚠️ Tailwind CSS Requirement
 
 This calendar **requires Tailwind CSS** to be installed in your project.
 
@@ -40,7 +40,7 @@ If you are using Next.js or React, follow the official guide:
 
 After installation, make sure Tailwind is properly configured in your project.
 
-🚀 Basic Usage:
+## 🚀 Basic Usage:
 
 ```tsx
 import { useState } from "react";
@@ -62,7 +62,7 @@ function App() {
   );
 }
 ```
-🧠 Props:
+## 🧠 Props:
 
 | Prop                        | Type                       | Description                           |
 | --------------------------- | -------------------------- | ------------------------------------- |
@@ -84,7 +84,7 @@ function App() {
 | `outsideMonthDaysTextColor` | `string`                   | Outside month days text color         |
 | `borderColor`               | `string`                   | Calendar border color                 |
 
-🎨 Full Customization Example:
+## 🎨 Full Customization Example:
 
 ```tsx
 <Calendar
@@ -107,13 +107,13 @@ function App() {
   borderColor="#D1D5DB"
 />
 ```
-📡 Events Data Source:
+## 📡 Events Data Source:
 By default, the calendar fetches events from:
 ```http
 GET https://badesaba.ir/api/site/getDataCalendar/{month}/{year}
 ```
 
-Expected Response Shape:
+## Expected Response Shape:
 ```ts
 type Event = {
   event: string;
@@ -125,33 +125,35 @@ type CalendarData = {
   events: Event[];
 };
 ```
-🧭 Event Tooltip:
-.Appears on hover
-.Displays:
-  .Jalali date
-  .Gregorian date
-  .Event list
-.Holidays are visually highlighted
+## 🧭 Event Tooltip
+
+- Appears on hover
+- Displays:
+  - Jalali date
+  - Gregorian date
+  - Event list
+- Holidays are visually highlighted
 
 
-🛠 Built With:
-React
-Next.js (App Router compatible)
-TypeScript
-Tailwind CSS
-RTL layout support
 
-⚠️ Important Notes:
+## 🛠 Built With:
+- React
+- Next.js (App Router compatible)
+- TypeScript
+- Tailwind CSS
+- RTL layout support
+
+## ⚠️ Important Notes:
 This component must be used inside a Client Component
 Required at the top of the file:
 ```tsx
 "use client";
 ```
 
-📄 License:
+## 📄 License:
 MIT License
 Free for personal and commercial use.
 
-❤️ Contributing:
+## ❤️ Contributing:
 Issues and Pull Requests are welcome!
 Feel free to improve or extend this calendar 🌱
