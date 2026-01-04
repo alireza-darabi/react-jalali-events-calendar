@@ -2,15 +2,25 @@
 A fully customizable Persian calendar component for React and Next.js with support for events, holidays, tooltips, RTL layout, and modern UI.
 
 ✨ Features:
+
 ✅ Accurate Gregorian ↔ Jalali date conversion
+
 ✅ Event & holiday support
+
 ✅ Holiday detection
+
 ✅ Tooltip with Persian & Gregorian dates
+
 ✅ Highlights today’s date
+
 ✅ Shows previous & next month days
+
 ✅ Fully responsive
+
 ✅ RTL-first design
+
 ✅ External month navigation control
+
 ✅ No external calendar dependencies
 
 📦 Installation:
