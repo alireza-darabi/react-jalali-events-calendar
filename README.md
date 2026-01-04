@@ -1,4 +1,4 @@
-### 📅 Persian Calendar for React & Next.js /n
+### 📅 Persian Calendar for React & Next.js
 A fully customizable Persian calendar component for React and Next.js with support for events, holidays, tooltips, RTL layout, and modern UI.
 
 ✨ Features:
