@@ -18,11 +18,11 @@ A fully customizable Persian calendar component for React and Next.js with suppo
 ## 📦 Installation:
 
 ```bash
-npm install react-persian-calendar
+npm install react-jalali-events-calendar
 ```
 or
 ```bash
-yarn add react-persian-calendar
+yarn add react-jalali-events-calendar
 ```
 
 ## ⚠️ Tailwind CSS Requirement
@@ -44,7 +44,7 @@ After installation, make sure Tailwind is properly configured in your project.
 
 ```tsx
 import { useState } from "react";
-import { Calendar } from "react-persian-calendar";
+import { Calendar } from "react-jalali-events-calendar";
 
 function App() {
   const [currentDate, setCurrentDate] = useState("");
