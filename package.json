@@ -2,6 +2,14 @@
   "name": "react-jalali-events-calendar",
   "version": "1.0.2",
   "description": "Persian (Jalali) calendar for React",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alireza-darabi/react-persian-calendar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alireza-darabi/react-persian-calendar/issues"
+  },
+  "homepage": "https://github.com/alireza-darabi/react-persian-calendar#readme",
   "files": [
     "dist"
   ],
