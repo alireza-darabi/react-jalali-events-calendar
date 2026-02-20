@@ -2,7 +2,9 @@
   "name": "react-persian-calendar",
   "version": "1.0.0",
   "description": "Persian (Jalali) calendar for React",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -16,7 +18,8 @@
   "sideEffects": false,
   "peerDependencies": {
     "react": ">=17",
-    "react-dom": ">=17"
+    "react-dom": ">=17",
+    "tailwindcss": ">=3.0.0"
   },
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts --clean"
