@@ -1,5 +1,5 @@
 {
-  "name": "react-persian-calendar",
+  "name": "react-jalali-events-calendar",
   "version": "1.0.1",
   "description": "Persian (Jalali) calendar for React",
   "files": [
