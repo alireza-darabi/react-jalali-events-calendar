@@ -1,7 +1,20 @@
 {
   "name": "react-jalali-events-calendar",
   "version": "1.0.5",
-  "description": "Persian (Jalali) calendar for React",
+  "description": "Modern Persian (Jalali/Shamsi) calendar component for React and Next.js with events, holidays and RTL support",
+  "keywords": [
+    "react",
+    "react calendar",
+    "jalali",
+    "jalali calendar",
+    "persian calendar",
+    "shamsi calendar",
+    "react jalali calendar",
+    "nextjs calendar",
+    "calendar with events",
+    "rtl calendar",
+    "iranian calendar"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/alireza-darabi/react-persian-calendar.git"

@@ -1,5 +1,5 @@
-### 📅 Persian Calendar for React & Next.js
-
+# react-jalali-events-calendar
+# React Jalali Events Calendar – Persian (Shamsi) Calendar for React & Next.js
 A fully customizable Persian calendar component for React and Next.js with support for events, holidays, tooltips, RTL layout, and modern UI.
 
 ## ✨ Features:
