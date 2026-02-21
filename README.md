@@ -1,4 +1,5 @@
 ### 📅 Persian Calendar for React & Next.js
+
 A fully customizable Persian calendar component for React and Next.js with support for events, holidays, tooltips, RTL layout, and modern UI.
 
 ## ✨ Features:
@@ -14,13 +15,14 @@ A fully customizable Persian calendar component for React and Next.js with suppo
 - ✅ External month navigation control
 - ✅ No external calendar dependencies
 
-
 ## 📦 Installation:
 
 ```bash
 npm install react-jalali-events-calendar
 ```
+
 or
+
 ```bash
 yarn add react-jalali-events-calendar
 ```
@@ -52,16 +54,19 @@ function App() {
   const [goPrev, setGoPrev] = useState(false);
 
   return (
-    <Calendar
-      goNext={goNext}
-      goPrev={goPrev}
-      setCurrentDate={setCurrentDate}
-      setNext={() => setGoNext(false)}
-      setPrev={() => setGoPrev(false)}
-    />
+    <div className="h-75 w-75">
+      <Calendar
+        goNext={goNext}
+        goPrev={goPrev}
+        setCurrentDate={setCurrentDate}
+        setNext={() => setGoNext(false)}
+        setPrev={() => setGoPrev(false)}
+      />
+    </div>
   );
 }
 ```
+
 ## 🧠 Props:
 
 | Prop                        | Type                       | Description                           |
@@ -87,33 +92,39 @@ function App() {
 ## 🎨 Full Customization Example:
 
 ```tsx
-<Calendar
-  setCurrentDate={setCurrentDate}
-  goNext={goNext}
-  goPrev={goPrev}
-  setNext={setGoNext}
-  setPrev={setGoPrev}
-  showEvents={true}
-  headerColor="#F1F4F9"
-  headerTextColor="#111827"
-  daysBgColor="#ffffff"
-  daysTextColor="#111827"
-  holidaysBgColor="#FEE2E2"
-  holidayTextColor="#DC2626"
-  currentDayBgColor="#2563EB"
-  currentDaytextColor="#ffffff"
-  outsideMonthDaysBg="#F9FAFB"
-  outsideMonthDaysTextColor="#9CA3AF"
-  borderColor="#D1D5DB"
-/>
+<div className="h-75 w-75">
+  <Calendar
+    setCurrentDate={setCurrentDate}
+    goNext={goNext}
+    goPrev={goPrev}
+    setNext={setGoNext}
+    setPrev={setGoPrev}
+    showEvents={true}
+    headerColor="#F1F4F9"
+    headerTextColor="#111827"
+    daysBgColor="#ffffff"
+    daysTextColor="#111827"
+    holidaysBgColor="#FEE2E2"
+    holidayTextColor="#DC2626"
+    currentDayBgColor="#2563EB"
+    currentDaytextColor="#ffffff"
+    outsideMonthDaysBg="#F9FAFB"
+    outsideMonthDaysTextColor="#9CA3AF"
+    borderColor="#D1D5DB"
+  />
+</div>
 ```
+
 ## 📡 Events Data Source:
+
 By default, the calendar fetches events from:
+
 ```http
 GET https://badesaba.ir/api/site/getDataCalendar/{month}/{year}
 ```
 
 ## Expected Response Shape:
+
 ```ts
 type Event = {
   event: string;
@@ -125,6 +136,7 @@ type CalendarData = {
   events: Event[];
 };
 ```
+
 ## 🧭 Event Tooltip
 
 - Appears on hover
@@ -134,9 +146,8 @@ type CalendarData = {
   - Event list
 - Holidays are visually highlighted
 
-
-
 ## 🛠 Built With:
+
 - React
 - Next.js (App Router compatible)
 - TypeScript
@@ -144,16 +155,20 @@ type CalendarData = {
 - RTL layout support
 
 ## ⚠️ Important Notes:
+
 This component must be used inside a Client Component
 Required at the top of the file:
+
 ```tsx
 "use client";
 ```
 
 ## 📄 License:
+
 MIT License
 Free for personal and commercial use.
 
 ## ❤️ Contributing:
+
 Issues and Pull Requests are welcome!
 Feel free to improve or extend this calendar 🌱
