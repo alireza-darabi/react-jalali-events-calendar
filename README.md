@@ -54,15 +54,23 @@ function App() {
   const [goPrev, setGoPrev] = useState(false);
 
   return (
-    <div className="h-75 w-75">
-      <Calendar
-        goNext={goNext}
-        goPrev={goPrev}
-        setCurrentDate={setCurrentDate}
-        setNext={() => setGoNext(false)}
-        setPrev={() => setGoPrev(false)}
-      />
-    </div>
+    <>
+      <div onClick={() => setGoNext(true)}>
+        <p>بعدی</p>
+      </div>
+      <div onClick={() => setGoPrev(true)}>
+        <p>قبلی</p>
+      </div>
+      <div className="h-75 w-75">
+        <Calendar
+          goNext={goNext}
+          goPrev={goPrev}
+          setCurrentDate={setCurrentDate}
+          setNext={() => setGoNext(false)}
+          setPrev={() => setGoPrev(false)}
+        />
+      </div>
+    </>
   );
 }
 ```
