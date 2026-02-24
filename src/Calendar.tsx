@@ -1,4 +1,5 @@
 "use client";
+import styles from "./Calendar.module.css";
 import { useCallback, useEffect, useMemo, useState } from "react";
 type Event = {
   event: string;
@@ -8,18 +9,7 @@ type Props = {
   setCurrentDate: (value: string) => void;
   goNext: boolean;
   goPrev: boolean;
-  headerColor?: string;
-  headerTextColor?: string;
   showEvents?: boolean;
-  holidaysBgColor?: string;
-  daysTextColor?: string;
-  currentDayBgColor?: string;
-  currentDaytextColor?: string;
-  holidayTextColor?: string;
-  daysBgColor?: string;
-  outsideMonthDaysBg?: string;
-  outsideMonthDaysTextColor?: string;
-  borderColor?: string;
   setNext: (value: boolean) => void;
   setPrev: (value: boolean) => void;
 };
@@ -31,7 +21,7 @@ type CalendarData = {
 function gregorianToJalali(
   gy: number,
   gm: number,
-  gd: number
+  gd: number,
 ): [number, number, number] {
   const g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
   const gy2 = gm > 2 ? gy + 1 : gy;
@@ -65,7 +55,7 @@ function gregorianToJalali(
 function jalaliToGregorian(
   jy: number,
   jm: number,
-  jd: number
+  jd: number,
 ): [number, number, number] {
   jy += 1595;
   let days =
@@ -130,22 +120,11 @@ function jalaliMonthLength(jy: number, jm: number): number {
 
 export default function Calendar({
   setCurrentDate,
-  headerColor,
   showEvents,
   goNext,
   goPrev,
-  headerTextColor,
   setNext,
-  daysBgColor,
   setPrev,
-  holidaysBgColor,
-  daysTextColor,
-  holidayTextColor,
-  currentDayBgColor,
-  currentDaytextColor,
-  borderColor,
-  outsideMonthDaysBg,
-  outsideMonthDaysTextColor,
 }: Props) {
   const gregorianMonthsFa = [
     "",
@@ -192,7 +171,7 @@ export default function Calendar({
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://badesaba.ir/api/site/getDataCalendar/${currentMonth}/${currentYear}`
+          `https://badesaba.ir/api/site/getDataCalendar/${currentMonth}/${currentYear}`,
         );
         const data = await response.json();
         setCalendarData(data);
@@ -267,7 +246,7 @@ export default function Calendar({
     const [startGy, startGm, startGd] = jalaliToGregorian(
       currentYear,
       currentMonth,
-      1
+      1,
     );
     const startDate = new Date(startGy, startGm - 1, startGd);
     const firstDayOfWeek = (startDate.getDay() + 1) % 7;
@@ -367,151 +346,76 @@ export default function Calendar({
     const [gy, gm, gd] = jalaliToGregorian(year, month, date);
     const key = `${gy}-${String(gm).padStart(2, "0")}-${String(gd).padStart(
       2,
-      "0"
+      "0",
     )}`;
     return calendarMap.get(key) ?? [];
   };
 
   return (
-    <div className="mx-auto h-full flex flex-col" dir="rtl">
+    <div className={styles.calendarContainer} dir="rtl">
       {/* Weekdays */}
-      <div
-        style={{
-          ...(headerTextColor ? { color: headerTextColor } : {}),
-          ...(headerColor
-            ? { backgroundColor: headerColor }
-            : { backgroundColor: "#F1F4F9" }),
-          ...(borderColor
-            ? { borderColor: borderColor }
-            : { borderColor: "#d9d7e0" }),
-        }}
-        className={`grid-cols-7  hidden 350:grid text-center bg-[#F1F4F9] border border-b-0  font-semibold rounded-t-[10px] py-2.5`}
-      >
+      <div className={styles.weekHeader}>
         {weekDays.map((day, index) => (
-          <p className="350:text-[13px]" key={index}>
-            {day}
-          </p>
+          <p key={index}>{day}</p>
         ))}
       </div>
-      <div
-        style={{
-          backgroundColor: headerColor ? headerColor : "#F1F4F9",
-        }}
-        className={`grid-cols-7 grid 350:hidden text-center bg-[#F1F4F9] font-semibold rounded-t-[10px] py-2.5`}
-      >
+      <div className={styles.weekHeaderMobile}>
         {weekDays.map((day, index) => (
-          <p className="text-12 350:hidden" key={index}>
-            {day[0]}
-          </p>
+          <p key={index}>{day[0]}</p>
         ))}
       </div>
 
       {/* Calendar days */}
-      <div
-        style={
-          borderColor
-            ? { borderColor: borderColor }
-            : { borderColor: "#d9d7e0" }
-        }
-        className="grid grid-cols-7 flex-1  border-l-0 border-b-0 border"
-      >
+      <div className={styles.daysContainer}>
         {days.map((d, i) => {
           const events = getEventsForDate(d.year, d.month, d.date);
           const isHolidayDay = events.some((event) => event.holiday);
           const columnIndex = i % 7; // Determine column (0 to 6)
           let tooltipPosition = "";
           if (columnIndex <= 1) {
-            tooltipPosition = "right-0"; // Left side
+            tooltipPosition = "r"; // Left side
           } else if (columnIndex >= 5) {
-            tooltipPosition = "left-0"; // Right side
+            tooltipPosition = "l"; // Right side
           } else {
-            tooltipPosition = "left-1/2 -translate-x-1/2"; // Center
+            tooltipPosition = "m"; // Center
           }
 
           return (
             <div
               key={i}
-              style={{
-                ...(!d.currentMonth && outsideMonthDaysBg
-                  ? { backgroundColor: outsideMonthDaysBg }
-                  : {}),
-                ...(!d.currentMonth && outsideMonthDaysTextColor
-                  ? { color: outsideMonthDaysTextColor }
-                  : !d.currentMonth
-                  ? { color: "#99a1af " }
-                  : {}),
-                ...(daysBgColor && d.currentMonth
-                  ? { backgroundColor: daysBgColor }
-                  : {}),
-                ...(daysTextColor && d.currentMonth
-                  ? { color: daysTextColor }
-                  : {}),
-                ...(holidayTextColor && isHolidayDay && d.currentMonth
-                  ? { color: holidayTextColor }
-                  : {}),
-                ...(isHolidayDay && holidaysBgColor && d.currentMonth
-                  ? { backgroundColor: holidaysBgColor }
-                  : {}),
-                ...(d.year === todayYear &&
-                d.month === todayMonth &&
-                d.date === todayDate &&
-                d.currentMonth &&
-                currentDayBgColor
-                  ? { backgroundColor: currentDayBgColor }
-                  : {}),
-                ...(d.year === todayYear &&
-                d.month === todayMonth &&
-                d.date === todayDate &&
-                d.currentMonth &&
-                currentDaytextColor
-                  ? { backgroundColor: currentDaytextColor }
-                  : {}),
-                ...(borderColor
-                  ? { borderColor: borderColor }
-                  : { borderColor: "#d9d7e0" }),
-              }}
-              className={`
-       border-r-0 border-t-0 border p-[5px] 
-      flex justify-center items-center 390:text-14 390:p-[10px] 700:p-[15px] 
-      relative text-12 group
-      ${d.currentMonth ? "" : ""}
+              className={`${styles.dayCell} ${d.currentMonth ? "" : styles.anotherMonth}
       ${
         d.year === todayYear &&
         d.month === todayMonth &&
         d.date === todayDate &&
         d.currentMonth
-          ? "bg-blue-500 text-white"
+          ? styles.currentDayCell
           : ""
       }
-      ${isHolidayDay && d.currentMonth ? "text-red-500" : ""}
+      ${isHolidayDay && d.currentMonth ? styles.holidayCell : ""}
     `}
             >
               {d.date}
 
               {showEvents && d.currentMonth && (
                 <div
-                  className={`
-          absolute hidden group-hover:block
-          bg-white border z-50 border-gray-300 overflow-hidden rounded shadow-lg
-          top-full mt-2 w-[220px] text-sm text-right ${tooltipPosition}
+                  className={`${styles.tooltipContainer} ${tooltipPosition == "r" ? styles.rightTooltip : tooltipPosition == "l" ? styles.leftTooltip : tooltipPosition == "m" ? styles.centerTooltip : ""}
         `}
                 >
                   {(() => {
                     const [gy2, gm2, gd2] = jalaliToGregorian(
                       d.year,
                       d.month,
-                      d.date
+                      d.date,
                     );
                     const gregorianMonthName = gregorianMonthsFa[gm2];
 
                     return (
                       <>
-                        {/* 🔵 عنوان بالای Tooltip */}
                         <div
                           className={`
-                  flex p-2 justify-between mb-2 pb-2 
-                  bg-linear-to-r from-[#00A1EE] to-[#1349E6] font-semibold text-white
-                  ${isHolidayDay ? "from-red-500 via-red-600 to-rose-700" : ""}
+                            ${styles.tooltipHeader}
+                  ${isHolidayDay ? styles.tooltipHeaderHoliday : ""}
                 `}
                         >
                           <span>{weekDays[i % 7]}</span>
@@ -520,33 +424,26 @@ export default function Calendar({
                           </span>
                         </div>
 
-                        {/* 🟡 تاریخ میلادی با نام ماه */}
-                        <div className="text-[11px] px-2 text-gray-700 mb-2 pb-2 border-b border-gray-200">
+                        {/*تاریخ میلادی */}
+                        <div
+                          className={`${styles.christianDate} ${isHolidayDay ? styles.christianDateHoliday : ""}`}
+                        >
                           {gd2} {gregorianMonthName} {gy2}
                         </div>
 
-                        {/* 🟢 رویدادها */}
+                        {/* رویدادها */}
                         {events.length > 0 ? (
-                          <div className="p-2 pt-0">
-                            <ul className="list-disc pr-4 flex flex-col">
+                          <div className={styles.eventsContainer}>
+                            <ul
+                              className={`${styles.eventsList} ${isHolidayDay ? styles.eventsListHoliday : ""}`}
+                            >
                               {events.map((event, index) => (
-                                <li
-                                  key={index}
-                                  className={`text-10 ${
-                                    isHolidayDay
-                                      ? "text-red-600"
-                                      : "text-[#23242e]"
-                                  }`}
-                                >
-                                  {event.event}
-                                </li>
+                                <li key={index}>{event.event}</li>
                               ))}
                             </ul>
                           </div>
                         ) : (
-                          <p className="text-10 p-2 pt-0 text-[#23242e]">
-                            رویدادی وجود ندارد
-                          </p>
+                          <p className={styles.noEvents}>رویدادی وجود ندارد</p>
                         )}
                       </>
                     );

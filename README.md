@@ -1,6 +1,8 @@
 # react-jalali-events-calendar
-# React Jalali Events Calendar – Persian (Shamsi) Calendar for React & Next.js
-A fully customizable Persian calendar component for React and Next.js with support for events, holidays, tooltips, RTL layout, and modern UI.
+
+## React Jalali Events Calendar – Persian (Shamsi) Calendar for React & Next.js
+
+A modern and fully customizable Jalali (Shamsi) calendar component for React and Next.js with event support, holiday detection, RTL layout, and CSS variable-based theming.
 
 ## ✨ Features:
 
@@ -8,11 +10,13 @@ A fully customizable Persian calendar component for React and Next.js with suppo
 - ✅ Event & holiday support
 - ✅ Holiday detection
 - ✅ Tooltip with Persian & Gregorian dates
-- ✅ Highlights today’s date
+- ✅ Highlights today
 - ✅ Shows previous & next month days
 - ✅ Fully responsive
 - ✅ RTL-first design
 - ✅ External month navigation control
+- ✅ Theme customization via CSS Variables
+- ✅ CSS Modules scoped styling
 - ✅ No external calendar dependencies
 
 ## 📦 Installation:
@@ -27,20 +31,13 @@ or
 yarn add react-jalali-events-calendar
 ```
 
-## ⚠️ Tailwind CSS Requirement
+## ⚠️ Next.js Users
 
-This calendar **requires Tailwind CSS** to be installed in your project.
+If you are using Next.js App Router, add this at the top of your file:
 
-All styles, layout, responsiveness, and tooltips are built using Tailwind utility classes.
-Without Tailwind CSS, the calendar **will not render correctly**.
-
-### Install Tailwind CSS
-
-If you are using Next.js or React, follow the official guide:
-
-👉 https://tailwindcss.com/docs/installation
-
-After installation, make sure Tailwind is properly configured in your project.
+```tsx
+"use client";
+```
 
 ## 🚀 Basic Usage:
 
@@ -48,26 +45,24 @@ After installation, make sure Tailwind is properly configured in your project.
 import { useState } from "react";
 import { Calendar } from "react-jalali-events-calendar";
 
-function App() {
+export default function App() {
   const [currentDate, setCurrentDate] = useState("");
   const [goNext, setGoNext] = useState(false);
   const [goPrev, setGoPrev] = useState(false);
 
   return (
     <>
-      <div onClick={() => setGoNext(true)}>
-        <p>بعدی</p>
-      </div>
-      <div onClick={() => setGoPrev(true)}>
-        <p>قبلی</p>
-      </div>
-      <div className="h-75 w-75">
+      <button onClick={() => setGoNext(true)}>بعدی</button>
+      <button onClick={() => setGoPrev(true)}>قبلی</button>
+
+      <div style={{ width: 350, height: 400 }}>
         <Calendar
+          setCurrentDate={setCurrentDate}
           goNext={goNext}
           goPrev={goPrev}
-          setCurrentDate={setCurrentDate}
-          setNext={() => setGoNext(false)}
-          setPrev={() => setGoPrev(false)}
+          setNext={setGoNext}
+          setPrev={setGoPrev}
+          showEvents
         />
       </div>
     </>
@@ -77,51 +72,77 @@ function App() {
 
 ## 🧠 Props:
 
-| Prop                        | Type                       | Description                           |
-| --------------------------- | -------------------------- | ------------------------------------- |
-| `setCurrentDate`            | `(value: string) => void`  | Returns formatted current date string |
-| `goNext`                    | `boolean`                  | Navigate to next month                |
-| `goPrev`                    | `boolean`                  | Navigate to previous month            |
-| `setNext`                   | `(value: boolean) => void` | Reset next navigation trigger         |
-| `setPrev`                   | `(value: boolean) => void` | Reset previous navigation trigger     |
-| `showEvents`                | `boolean`                  | Enable event tooltips                 |
-| `headerColor`               | `string`                   | Header background color               |
-| `headerTextColor`           | `string`                   | Header text color                     |
-| `daysBgColor`               | `string`                   | Current month days background         |
-| `daysTextColor`             | `string`                   | Current month days text color         |
-| `holidaysBgColor`           | `string`                   | Holiday background color              |
-| `holidayTextColor`          | `string`                   | Holiday text color                    |
-| `currentDayBgColor`         | `string`                   | Today background color                |
-| `currentDaytextColor`       | `string`                   | Today text color                      |
-| `outsideMonthDaysBg`        | `string`                   | Outside month days background         |
-| `outsideMonthDaysTextColor` | `string`                   | Outside month days text color         |
-| `borderColor`               | `string`                   | Calendar border color                 |
+| Prop             | Type                       | Description                           |
+| ---------------- | -------------------------- | ------------------------------------- |
+| `setCurrentDate` | `(value: string) => void`  | Returns formatted current date string |
+| `goNext`         | `boolean`                  | Navigate to next month                |
+| `goPrev`         | `boolean`                  | Navigate to previous month            |
+| `setNext`        | `(value: boolean) => void` | Reset next navigation trigger         |
+| `setPrev`        | `(value: boolean) => void` | Reset previous navigation trigger     |
+| `showEvents`     | `boolean`                  | Enable event tooltips                 |
 
-## 🎨 Full Customization Example:
+## 🎨 Customization (CSS Variables)
+
+All visual styles are controlled via CSS Variables.
+You can override them globally or inside a wrapper class.
+
+### 🌍 Global Theme Example
+
+```css
+:root {
+  --weekHeaderBg: #f1f4f9;
+  --weekHeaderTextColor: #23242e;
+  --weekHeaderFontSize: 14px;
+
+  --daysFontSize: 14px;
+
+  --borderColor: #d9d7e0;
+
+  --currentDayBg: #2563eb;
+  --currentDayTextColor: #ffffff;
+
+  --holidayBg: #ffffff;
+  --holidayTextColor: #fb2c36;
+
+  --outOfMonthBg: #ffffff;
+  --outOfMonthTextColor: #99a1af;
+
+  --tooltipBg: #ffffff;
+
+  --tooltipHeaderBgFrom: #00a1ee;
+  --tooltipHeaderBgTo: #1349e6;
+  --tooltipHeaderTextColor: #ffffff;
+
+  --tooltipHeaderHolidayBgFrom: #fb2c36;
+  --tooltipHeaderHolidayBgTo: #b91c1c;
+
+  --eventsTextColor: #23242e;
+  --eventsFontSize: 12px;
+
+  --christianDateFontSize: 11px;
+  --christianDateTextColor: #23242e;
+}
+```
+
+### 🎯 Scoped Theme Example
 
 ```tsx
-<div className="h-75 w-75">
-  <Calendar
-    setCurrentDate={setCurrentDate}
-    goNext={goNext}
-    goPrev={goPrev}
-    setNext={setGoNext}
-    setPrev={setGoPrev}
-    showEvents={true}
-    headerColor="#F1F4F9"
-    headerTextColor="#111827"
-    daysBgColor="#ffffff"
-    daysTextColor="#111827"
-    holidaysBgColor="#FEE2E2"
-    holidayTextColor="#DC2626"
-    currentDayBgColor="#2563EB"
-    currentDaytextColor="#ffffff"
-    outsideMonthDaysBg="#F9FAFB"
-    outsideMonthDaysTextColor="#9CA3AF"
-    borderColor="#D1D5DB"
-  />
+<div className="darkCalendar">
+  <Calendar {...props} />
 </div>
 ```
+
+```css
+.darkCalendar {
+  --weekHeaderBg: #1f2937;
+  --weekHeaderTextColor: #ffffff;
+  --currentDayBg: #10b981;
+  --tooltipBg: #111827;
+  --eventsTextColor: #e5e7eb;
+}
+```
+
+You can render multiple calendars with different themes in the same page.
 
 ## 📡 Events Data Source:
 
@@ -145,9 +166,10 @@ type CalendarData = {
 };
 ```
 
-## 🧭 Event Tooltip
+## 🧭 Tooltip Behavior
 
 - Appears on hover
+- Automatically adjusts position (left / center / right)
 - Displays:
   - Jalali date
   - Gregorian date
@@ -159,17 +181,9 @@ type CalendarData = {
 - React
 - Next.js (App Router compatible)
 - TypeScript
-- Tailwind CSS
+- CSS Modules
 - RTL layout support
-
-## ⚠️ Important Notes:
-
-This component must be used inside a Client Component
-Required at the top of the file:
-
-```tsx
-"use client";
-```
+- Native Jalali conversion logic (no moment, no dayjs)
 
 ## 📄 License:
 

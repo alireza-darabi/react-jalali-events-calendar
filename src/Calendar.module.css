@@ -1,0 +1,169 @@
+.calendarContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  direction: rtl;
+  margin: 0 auto;
+}
+.weekHeader {
+  display: none;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  background-color: var(--weekHeaderBg, #f1f4f9);
+  border: 1px solid var(--borderColor, #d9d7e0);
+  border-bottom: 0;
+  font-weight: 600;
+  font-size: var(--weekHeaderFontSize, 14px) !important;
+  color: var(--weekHeaderTextColor, #23242e);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+.rightTooltip {
+  right: 0;
+}
+.leftTooltip {
+  left: 0;
+}
+.centerTooltip {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.weekHeaderMobile {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  background-color: var(--weekHeaderBg, #f1f4f9);
+  border: 1px solid var(--borderColor, #d9d7e0);
+  color: var(--weekHeaderTextColor, #23242e);
+  border-bottom: 0;
+  font-weight: 500;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-size: 12px;
+}
+.daysContainer {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  flex: 1;
+  border: 1px solid var(--borderColor, #d9d7e0);
+  border-left: 0;
+  border-bottom: 0;
+}
+.dayCell {
+  border: 1px solid var(--borderColor, #d9d7e0);
+  border-right: none;
+  border-top: none;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-size: var(--daysFontSize, 14px);
+}
+.currentDayCell {
+  background-color: var(--currentDayBg, oklch(62.3% 0.214 259.815)) !important;
+  color: var(--currentDayTextColor, #fff);
+}
+.holidayCell {
+  background-color: var(--holidayBg, #fff);
+  color: var(--holidayTextColor, #fb2c36);
+}
+.anotherMonth {
+  background-color: var(--outOfMonthBg, #fff);
+  color: var(--outOfMonthTextColor, #99a1af);
+}
+.tooltipContainer {
+  position: absolute;
+  border: 1px solid var(--borderColor, #d1d5dc);
+  background-color: var(--tooltipBg, #fff);
+  z-index: 50;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  top: 100%;
+  margin-top: 8px;
+  width: 220px;
+  text-align: right;
+  display: none;
+}
+.dayCell:hover .tooltipContainer {
+  display: block;
+}
+.tooltipHeader {
+  display: flex;
+  gap: 4px;
+  padding: 8px;
+  margin-bottom: 8px;
+  background: linear-gradient(
+    to right,
+    var(--tooltipHeaderBgFrom, #00a1ee),
+    var(--tooltipHeaderBgTo, #1349e6)
+  );
+  font-weight: 600;
+  color: var(--tooltipHeaderTextColor, #fff);
+}
+.tooltipHeaderHoliday {
+  background: linear-gradient(
+    to right,
+    var(--tooltipHeaderHolidayBgFrom, #fb2c36),
+    var(--tooltipHeaderHolidayBgTo, oklch(51.4% 0.222 16.935))
+  ) !important;
+}
+.christianDate {
+  font-size: var(--christianDateFontSize, 11px);
+  padding-inline: 8px;
+  color: var(--christianDateTextColor, #23242e);
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--borderColor, #d1d5dc);
+}
+.christianDateHoliday {
+  color: var(--holidayTextColor, oklch(57.7% 0.245 27.325));
+}
+.eventsContainer {
+  padding: 8px;
+  padding-top: 0px;
+}
+.eventsList {
+  list-style-type: disc;
+  display: flex;
+  flex-direction: column;
+  padding-right: 16px;
+  color: var(--eventsTextColor, #23242e);
+  font-size: var(--eventsFontSize, 12px);
+}
+.eventsListHoliday {
+  color: var(--holidayTextColor, oklch(57.7% 0.245 27.325));
+}
+.noEvents {
+  color: var(--eventsTextColor, #23242e);
+  padding: 8px;
+  padding-top: 0px;
+  font-size: var(--eventsFontSize, 12px);
+}
+@media (min-width: 350px) {
+  .weekHeader {
+    display: grid;
+    font-size: 13px;
+  }
+  .weekHeaderMobile {
+    display: none;
+  }
+}
+@media (min-width: 390px) {
+  .dayCell {
+    padding: 10px;
+  }
+}
+@media (min-width: 700px) {
+  .dayCell {
+    padding: 15px;
+  }
+}
